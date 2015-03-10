@@ -4,6 +4,7 @@ A spring boot enabled hello world application
 
 [![Build Status](https://travis-ci.org/gazgeek/springboot-helloworld.svg?branch=master)](https://travis-ci.org/gazgeek/springboot-helloworld)
 
+[![Coverage Status](https://coveralls.io/repos/gazgeek/springboot-helloworld/badge.svg)](https://coveralls.io/r/gazgeek/springboot-helloworld)
 
 ## Usage
 
