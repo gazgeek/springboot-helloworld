@@ -6,5 +6,7 @@ deploy:
   api_key:
     secure: BD1U6Bg1/nWiy/Y0bcvjoG2pHsyaeufXK34sKo+I0T5nXcm640fx6wVMuIjjpNHDFe0fKEYhJXYO0VurOmuxTKWR1WxdeqZjQ0Ha4QDTwDgXYjk5Cy9iDRuhQINJqANce7lyRsB8WZ1HbsnFl/ZBrVZUINtbNs5mLYwrAmRSVyE=
   app: springboot-helloworld
+  run:
+    - restart
   on:
     repo: gazgeek/springboot-helloworld
