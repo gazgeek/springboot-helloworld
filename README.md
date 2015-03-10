@@ -6,6 +6,9 @@ A spring boot enabled hello world application
 
 [![Coverage Status](https://coveralls.io/repos/gazgeek/springboot-helloworld/badge.svg)](https://coveralls.io/r/gazgeek/springboot-helloworld)
 
+- Travis CI build and test
+- Continuous deployment to Heroku on success
+
 ## Usage
 
 - Directly using maven
@@ -23,5 +26,6 @@ Application.java
 mvn clean install
 java -jar target/helloworld-0.0.1-SNAPSHOT.jar
 ```
+
 
 
