@@ -8,3 +8,5 @@ deploy:
   app: springboot-helloworld
   on:
     repo: gazgeek/springboot-helloworld
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
