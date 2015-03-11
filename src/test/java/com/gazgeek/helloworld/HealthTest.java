@@ -28,6 +28,7 @@ public class HealthTest {
 
     private RestTemplate restTemplate = new TestRestTemplate();
 
+
     @Test
     public void checkHealth() {
         getRequest("/health")
