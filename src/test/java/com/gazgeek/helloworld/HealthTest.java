@@ -15,7 +15,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,9 +33,9 @@ public class HealthTest {
 
     @Test
     public void checkHealth() {
-        getRequest("/health")
-            .assertStatusCode(OK)
-            .assertResponseBody("{\"status\":\"UP\"}");
+        HealthResponse r = getRequest("/health");
+        r.assertStatusCode(OK);
+        assertTrue(r.responseEntity.getBody().contains("\"status\":\"UP\""));
     }
 
 
