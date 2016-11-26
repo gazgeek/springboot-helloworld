@@ -1,4 +1,4 @@
-FROM dockerfile/java:oracle-java8
+FROM openjdk:8-alpine
 
 ENV MAVEN_VERSION 3.2.5
 
