@@ -36,6 +36,7 @@ jobs:
     runs-on: alpine
      steps:
      - uses: actions/checkout@v1
+     - name: Deploy
        script:
        - apk update && apk add curl
        - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
