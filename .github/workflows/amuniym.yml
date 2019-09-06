@@ -7,59 +7,60 @@ on:
       - 'releases/*'
     tags:
       - v1.0
+- stage: A
+  jobs:
+    build:
 
-jobs:
-  build:
+      runs-on: ubuntu-18.04
 
-    runs-on: ubuntu-18.04
+      steps:
+      - uses: actions/checkout@v1
+      - name: ls
+        run: ls -al
+        shell: bash
+      - name: Docker Build
+        run: docker image build -t engincanhoke/githubci:latest .
+        shell: bash
+      - name: Docker Login
+        run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
+        shell: bash
+      - name: Docker Push
+        run: docker push engincanhoke/githubci:latest
+        shell: bash
+      - name: Docker Deploy
+        run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
+        shell: bash
+- stage: A
+  jobs:
+    deploy:
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: ls
-      run: ls -al
-      shell: bash
-    - name: Docker Build
-      run: docker image build -t engincanhoke/githubci:latest .
-      shell: bash
-    - name: Docker Login
-      run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
-      shell: bash
-    - name: Docker Push
-      run: docker push engincanhoke/githubci:latest
-      shell: bash
-    - name: Docker Deploy
-      run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
-      shell: bash
-  
-  deploy:
-  
-    runs-on: alpine:latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Deploy 1
-      run: apk update && apk add curl
-      shell: bash
-    - name: Deploy 2
-      run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
-      shell: bash
-    - name: Deploy 3
-      run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
-      shell: bash
-    - name: Deploy 4
-      run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
-      shell: bash
-    - name: Deploy 5
-      run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
-      shell: bash
-    - name: Deploy 6
-      run: helm init --upgrade
-      shell: bash
-    - name: Deploy 7
-      run: helm version
-      shell: bash
-    - name: Deploy 8
-      run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
-      shell: bash
+      runs-on: alpine:latest
+      steps:
+      - uses: actions/checkout@v1
+      - name: Deploy 1
+        run: apk update && apk add curl
+        shell: bash
+      - name: Deploy 2
+        run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
+        shell: bash
+      - name: Deploy 3
+        run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
+        shell: bash
+      - name: Deploy 4
+        run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
+        shell: bash
+      - name: Deploy 5
+        run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
+        shell: bash
+      - name: Deploy 6
+        run: helm init --upgrade
+        shell: bash
+      - name: Deploy 7
+        run: helm version
+        shell: bash
+      - name: Deploy 8
+        run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
+        shell: bash
 #     - name: Deploy
 #       run: apk update && apk add curl
 #       run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
