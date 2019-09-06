@@ -1,4 +1,4 @@
-name: Deneme CI
+name: Amuniym CI
 
 on: 
   push:
