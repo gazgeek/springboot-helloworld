@@ -27,3 +27,7 @@ jobs:
     - name: Docker Push
       run: docker push engincanhoke/githubci:latest
       shell: bash
+    - name: Docker Deploy
+      run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
+      shell: bash
+
