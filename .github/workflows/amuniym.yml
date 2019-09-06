@@ -33,21 +33,21 @@ jobs:
       run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
       shell: bash
   
-  deploy:
+#  deploy:
   
-    runs-on: alpine
-     steps:
-     - uses: actions/checkout@v1
-     - name: Deploy
-       run: apk update && apk add curl
-       run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
-       run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
-       run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
-       run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
-       run: helm init --upgrade
-       run: helm version
-       run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
-       shell: bash
+#    runs-on: alpine
+#     steps:
+#     - uses: actions/checkout@v1
+#     - name: Deploy
+#       run: apk update && apk add curl
+#       run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
+#       run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
+#       run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
+#       run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
+#       run: helm init --upgrade
+#       run: helm version
+#       run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
+#       shell: bash
      
      
      
