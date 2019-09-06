@@ -22,8 +22,8 @@ jobs:
     - name: Build with Maven
       run: mvn package --file pom.xml
     - name: Docker Login
-      run: docker login -u ${{ USERNAME }} -p ${{ PASSWORD }}
+      run: docker login -u $USERNAME -p $PASSWORD
       shell: bash
     - name: Docker Push
-      run: docker push ${{ USERNAME }}/springboot-helloworld-0.0.1-g
+      run: docker push $USERNAME/springboot-helloworld-0.0.1-g
       shell: bash
