@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Docker Build
-      run: docker image build -t springboot-helloworld .
+    - name: ls
+      run: ls -al
       shell: bash
-    - name: Docker Commit
-      run: docker commit $(docker ps -a | grep gazgeek/springboot-helloworld | awk {'print $1'}) engincanhoke/springboot-helloworld-0.0.3-g
+    - name: Docker Build
+      run: docker image build -t engincanhoke/githubci:latest .
       shell: bash
     - name: Docker Login
       run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
       shell: bash
     - name: Docker Push
-      run: docker push engincanhoke/springboot-helloworld-0.0.3-g
+      run: docker push engincanhoke/githubci:latest
       shell: bash
