@@ -17,8 +17,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: ls
       run: ls -al
-      run: pwd
-      run: echo engincan
       shell: bash
     - name: Docker Build
       run: docker image build -t engincanhoke/githubci:latest .
@@ -33,11 +31,20 @@ jobs:
       run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
       shell: bash
   
-#  deploy:
+  deploy:
   
-#    runs-on: alpine
-#     steps:
-#     - uses: actions/checkout@v1
+    runs-on: alpine
+     steps:
+     - uses: actions/checkout@v1
+       script:
+       - apk update && apk add curl
+       - curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
+       - chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
+       - curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
+       - mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
+       - helm init --upgrade
+       - helm version
+       - helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
 #     - name: Deploy
 #       run: apk update && apk add curl
 #       run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
