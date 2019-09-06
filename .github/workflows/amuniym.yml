@@ -21,6 +21,9 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn package --file pom.xml
+    - name: Docker Build
+      run: docker image build -t springboot-helloworld .
+      shell: bash
     - name: Docker Commit
       run: docker commit $(docker ps -a | grep gazgeek/springboot-helloworld | awk {'print $1'}) engincanhoke/springboot-helloworld-0.0.3-g
       shell: bash
