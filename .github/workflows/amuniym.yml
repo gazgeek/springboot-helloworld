@@ -30,15 +30,8 @@ on:
       - name: Docker Deploy
         run: docker container run -p 8080:8080 -d engincanhoke/githubci:latest
         shell: bash
-- stage: A
-  jobs:
-    deploy:
-
-      runs-on: alpine:latest
-      steps:
-      - uses: actions/checkout@v1
       - name: Deploy 1
-        run: apk update && apk add curl
+        run: apt update && apt install curl
         shell: bash
       - name: Deploy 2
         run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
