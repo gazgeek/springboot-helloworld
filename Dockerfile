@@ -11,7 +11,7 @@ ENV MAVEN_HOME /usr/share/maven
 COPY . /data/springboot-helloworld
 WORKDIR /data/springboot-helloworld
 
-RUN ["mvn", "clean", "install"]
+RUN ["mvn", "clean", "install", "-Dmaven.test.skip=true"]
 
 EXPOSE 8090
 
