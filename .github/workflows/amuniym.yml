@@ -25,5 +25,5 @@ jobs:
       run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
       shell: bash
     - name: Docker Push
-      run: docker push engincanhoke/springboot-helloworld-0.0.1-g
+      run: docker push engincanhoke/springboot-helloworld-0.0.2-g
       shell: bash
