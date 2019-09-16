@@ -26,20 +26,20 @@ jobs:
     - name: Docker Push
       run: docker push engincanhoke/githubci:0.0.3-g
       shell: bash
-    - name: Kubernetes Deploy
-      shell:
-        - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-        - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-        - sudo apt-get update && sudo apt-get install google-cloud-sdk
-#    - name: Deploy 1
-#      run: apt update && apt install curl
-#      shell: bash
-#    - name: Deploy 2
-#      run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
-#      shell: bash
-#    - name: Deploy 3
-#      run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
-#      shell: bash
+#    - name: Kubernetes Deploy
+#      shell:
+#        - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+#        - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+#        - sudo apt-get update && sudo apt-get install google-cloud-sdk
+    - name: Deploy 1
+      run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+      shell: bash
+    - name: Deploy 2
+      run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+      shell: bash
+    - name: Deploy 3
+      run: sudo apt-get update && sudo apt-get install google-cloud-sdk
+      shell: bash
 #    - name: Deploy 4
 #      run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
 #      shell: bash
