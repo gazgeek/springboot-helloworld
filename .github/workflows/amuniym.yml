@@ -26,9 +26,11 @@ jobs:
     - name: Docker Push
       run: docker push engincanhoke/githubci:0.0.3-g
       shell: bash
-    - name: Docker Deploy
-      run: docker container run -p 8080:8080 -d engincanhoke/githubci:0.0.3-g
-      shell: bash
+    - name: Kubernetes Deploy
+      shell:
+        - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+        - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+        - sudo apt-get update && sudo apt-get install google-cloud-sdk
 #    - name: Deploy 1
 #      run: apt update && apt install curl
 #      shell: bash
