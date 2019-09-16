@@ -14,32 +14,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: ls
-      run: ls -al
-      shell: bash
-    - name: Docker Build
-      run: docker image build -t engincanhoke/githubci:0.0.3-g .
-      shell: bash
     - name: Docker Login
       run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
       shell: bash
-    - name: Docker Push
-      run: docker push engincanhoke/githubci:0.0.3-g
+    - name: Docker Image Build
+      run: docker image build -t engincanhoke/githubci:latest .
       shell: bash
-#    - name: Kubernetes Deploy
-#      shell:
-#        - echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-#        - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-#        - sudo apt-get update && sudo apt-get install google-cloud-sdk
-    - name: Deploy 1
-      run: echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    - name: Docker Image Push
+      run: docker push engincanhoke/githubci:latest
       shell: bash
-    - name: Deploy 2
-      run: curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    - name: Installations
+      run: |
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
+        sudo apt-get update && sudo apt-get install google-cloud-sdk && \
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && \
+        chmod +x ./kubectl && \
+        sudo mv ./kubectl /usr/local/bin/kubectl && \
+        curl -L https://git.io/get_helm.sh | bash && \
+        helm init --client-only 
       shell: bash
-    - name: Deploy 3
-      run: sudo apt-get update && sudo apt-get install google-cloud-sdk
-      shell: bash
+    - name: Helm deploy
+      run: |
+        helm upgrade helloworld hello-world --namespace application --set image.tag="latest" && \
+
 #    - name: Deploy 4
 #      run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
 #      shell: bash
