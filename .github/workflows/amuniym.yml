@@ -37,6 +37,10 @@ jobs:
     - name: Helm deploy
       run: |
         helm upgrade helloworld hello-world --namespace application --set image.tag="latest" && \
+        gcloud init --console-only && \
+        gcloud config set account gcpcmdlineuser@axial-history-248207.iam.gserviceaccount.com && \
+        gcloud auth activate-service-account --project=axial-history-248207 --key-file=somekey.json && \
+        
 
 #    - name: Deploy 4
 #      run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
