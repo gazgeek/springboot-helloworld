@@ -33,7 +33,7 @@ jobs:
         sudo mv ./kubectl /usr/local/bin/kubectl && \
         curl -L https://git.io/get_helm.sh | bash && \
         helm init --client-only && \
-        export KUBE_CONFIG=$(pwd)/config
+        kubectl config use-context gke_axial-history-248207_europe-north1-b_standard-cluster-1 --kubeconfig config
       shell: bash
     - name: Helm deploy
       run: helm upgrade helloworld hello-world --namespace application --set image.tag="latest"
