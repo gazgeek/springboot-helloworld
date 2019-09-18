@@ -37,7 +37,7 @@ jobs:
       shell: bash
     - name: Helm deploy
       run: |
-        if [ $(helm list | grep helloworld | wc -l) > 0 ]
+        if [ "$(helm list | grep helloworld | wc -l)" != "0" ]
         then
           helm upgrade helloworld hello-world --namespace application --set image.tag="latest"
         else
