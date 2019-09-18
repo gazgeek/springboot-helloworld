@@ -32,38 +32,15 @@ jobs:
         chmod +x ./kubectl && \
         sudo mv ./kubectl /usr/local/bin/kubectl && \
         curl -L https://git.io/get_helm.sh | bash && \
-        helm init --client-only 
+        helm init --client-only && \
+        export KUBE_CONFIG=$(pwd)/config
       shell: bash
     - name: Helm deploy
       run: |
-        helm upgrade helloworld hello-world --namespace application --set image.tag="latest" && \
-        gcloud init --console-only && \
-        gcloud config set account gcpcmdlineuser@axial-history-248207.iam.gserviceaccount.com && \
-        gcloud auth activate-service-account --project=axial-history-248207 --key-file=somekey.json && \
-        
+        if [ $(helm list | grep helloworld | wc -l) > 0 ]
+        then
+          helm upgrade helloworld hello-world --namespace application --set image.tag="latest"
+        else
+          helm install hello-world --name helloworld --namespace application --set image.tag="latest"
+        fi
 
-#    - name: Deploy 4
-#      run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
-#      shell: bash
-#    - name: Deploy 5
-#      run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
-#      shell: bash
-#    - name: Deploy 6
-#      run: helm init --upgrade
-#      shell: bash
-#    - name: Deploy 7
-#      run: helm version
-#      shell: bash
-#    - name: Deploy 8
-#      run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
-#      shell: bash
-#     - name: Deploy
-#       run: apk update && apk add curl
-#       run: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.6.0/bin/linux/amd64/kubectl
-#       run: chmod +x ./kubectl && mv ./kubectl /usr/bin/kubectl
-#       run: curl -LO https://storage.googleapis.com/kubernetes-helm/helm-v2.14.1-linux-amd64.tar.gz  && tar -xvzf helm-v2.14.1-linux-amd64.tar.gz
-#       run: mv linux-amd64/helm /usr/bin/ && chmod +x /usr/bin/helm
-#       run: helm init --upgrade
-#       run: helm version
-#       run: helm upgrade --install production-backend-tarfin --namespace prod --set backend.image=$IMAGE_URL_PROD backend-deploy/
-#       shell: bash
