@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Docker Login
-      run: docker login -u engincanhoke -p 6UU5hfdn2nWAX3A
+      run: docker login -u $USERNAME -p $PASSWORD
       shell: bash
     - name: Docker Image Build
       run: docker image build -t engincanhoke/githubci:latest .
@@ -32,8 +32,12 @@ jobs:
         chmod +x ./kubectl && \
         sudo mv ./kubectl /usr/local/bin/kubectl && \
         curl -L https://git.io/get_helm.sh | bash && \
-        helm init --client-only && \
-        kubectl config use-context gke_axial-history-248207_europe-north1-b_standard-cluster-1 --kubeconfig config
+        echo $DEPLOYER | base64 --decode > deployer.json && \
+        gcloud auth activate-service-account $SERVICEACCOUNT --key-file=$(pwd)/deployer.json --project=$PROJECTNAME && \
+        gcloud container clusters get-credentials $CLUSTERNAME --zone $ZONE && \
+        helm init --client-only 
+        
+        
       shell: bash
     - name: Helm deploy
       run: helm upgrade helloworld hello-world --namespace application --set image.tag="latest"
