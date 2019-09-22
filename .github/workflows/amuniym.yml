@@ -40,5 +40,7 @@ jobs:
         
       shell: bash
     - name: Helm deploy
-      run: helm upgrade --install helloworld hello-world --namespace application --set image.tag="latest"
+      run: |
+        # helm upgrade --install helloworld hello-world --namespace application --set image.tag="latest"
+        kubectl get pods -n kube-system
 
