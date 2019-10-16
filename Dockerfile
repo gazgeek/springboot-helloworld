@@ -2,7 +2,7 @@ FROM maven:3-jdk-8-alpine as builder
   
 COPY . /data/springboot-helloworld
 WORKDIR /data/springboot-helloworld
-RUN ["mvn", "clean", "install"]
+RUN ["mvn", "clean", "install", "-Dmaven.test.skip=true"]
 
 FROM openjdk:8-alpine
 
