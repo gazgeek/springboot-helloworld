@@ -1,4 +1,4 @@
-package com.gazgeek.helloworld;
+package com.iswind.helloworld;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
