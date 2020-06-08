@@ -1,4 +1,4 @@
-package com.gazgeek.helloworld;
+package com.iswind.helloworld;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +28,7 @@ public class HomeControllerTest {
     public void helloWorld() {
         getRequest("/")
             .assertStatusCode(OK)
-            .assertResponseBody("Hello from GazGeek!");
+            .assertResponseBody("Hello from iswind!");
     }
 
     private HelloWorldResponse getRequest(String uri) {
