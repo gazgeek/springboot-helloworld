@@ -1,4 +1,4 @@
-package com.gazgeek.helloworld;
+package com.iswind.helloworld;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
