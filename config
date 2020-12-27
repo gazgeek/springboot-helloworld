@@ -1,0 +1,26 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURDekNDQWZPZ0F3SUJBZ0lRSWFCYW1lNmJoTGFLY0taazBvMEpDREFOQmdrcWhraUc5dzBCQVFzRkFEQXYKTVMwd0t3WURWUVFERXlSaVlXRXdaRGxtWWkwd1l6TmtMVFF3WVdNdFlXRTFPUzB6TkRneVlXUTFOV00xTXpjdwpIaGNOTVRrd09UQTJNVEl4TmpBeVdoY05NalF3T1RBME1UTXhOakF5V2pBdk1TMHdLd1lEVlFRREV5UmlZV0V3ClpEbG1ZaTB3WXpOa0xUUXdZV010WVdFMU9TMHpORGd5WVdRMU5XTTFNemN3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURYYTUvWE11c1NIRmQ2UTF1bm5WZ3dqS0NYVGlVZ0t2OHBKUktsYVNxdgowdXFXMjZEMFprVXRHYUxxWDBvWTB5TlJMTGpZRGRxWG9ZSEJNZllhUEY5NzlmTVFzSEJzYjdnWmZZTHQyR0ZDCi9za0htUFI2SXQya25DR3RIQ2lZSUNCdDRSYmZUb0VqNDNiSzdGd3pmdE9uNkl0dmRudmZBMnl4UmxSRjg1RmEKVW5vSzk3U29wdUtIa2FhR1NBeGxGb1pIb1VicnpRalI3ZTVlN2dEWW8zZUdTNjdIZ01NUWVsbFhuNFkvUDRRQQppRnFDMU5OYWRsaE9MZ01jMjJhWHFJM3E4Tngrblp1UHcwUUhjUXJONVVaVU9nQitxb0w4ZWFJYkJtRGF2RFFrCnNyN3lzdDgrUEFRR3U5V0lGaDMyMjBtV012M2Q5ajR2aSt3ZVZiSmM0dllIQWdNQkFBR2pJekFoTUE0R0ExVWQKRHdFQi93UUVBd0lDQkRBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFEUQozaGlvdHROVEVDZWpFdjQvd1d0N3J4cXhTVWFsNTV5azJUUUlpc2dVOEp4NTErWVZTc1lob1FCZTlla2xFV1lmClIweEV6bm1nUzhhZGJJYktkTFViSXU0K3E1aksyM2hYUHNtOXM1aHQvWXYzRnhKMFVUV2ZnbVhYTlgzNTVuMWkKcERxMkM0MkZFZHREaFhFQVJQR3NQOUcrQ0tEazlhcDFjOE1aNzhBd1RtSkppWnJQWEI2SjZuMWY4L2UzdWxydQptKzlvc3FmOTR0dFgwaU9sNThaNDhCdmtGa1IvOEdxakxSK0pic1VoL0NySzg1aTVEL2cyd0ZxR1NjR2JKNUhWClFOQ0dPTFdGczdkZmZZQTZsUzRKSmNseU82TnAvdm9lUCtReENkdFNVb0dOVlE5NDhINSs1VWFJNlFJamxsazMKRnNrUWVuaCtxNFlPM25iekJGa3cKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://35.228.176.115
+  name: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+contexts:
+- context:
+    cluster: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+    user: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+  name: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+current-context: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+kind: Config
+preferences: {}
+users:
+- name: gke_axial-history-248207_europe-north1-b_standard-cluster-1
+  user:
+    auth-provider:
+      config:
+        access-token: ya29.Il-HB4_VLKYnVHUWOi9qv3UNuqWu49ROQvN_Efiy4P2v8K8oDf02kxfeOCRPMUan6S8hsVXjFn5warL4wM3shgkmOTvA6HbYqqEMACAZKs-29mnOCJrXsaBQKP5d3QegDw
+        cmd-args: config config-helper --format=json
+        cmd-path: /usr/lib64/google-cloud-sdk/bin/gcloud
+        expiry: "2019-09-18T15:49:06Z"
+        expiry-key: '{.credential.token_expiry}'
+        token-key: '{.credential.access_token}'
+      name: gcp

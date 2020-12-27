@@ -1,0 +1,43 @@
+name: Amuniym CI
+
+on: 
+  push:
+    branches:    
+      - master
+      - 'releases/*'
+    tags:
+      - v1.0
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Docker Login
+      run: docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+      shell: bash
+    - name: Docker Image Build
+      run: docker image build -t engincanhoke/githubci:latest .
+      shell: bash
+    - name: Docker Image Push
+      run: docker push engincanhoke/githubci:latest
+      shell: bash
+    - name: Installations
+      run: |
+        echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
+        sudo apt-get update && sudo apt-get install google-cloud-sdk && \
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && \
+        chmod +x ./kubectl && \
+        sudo mv ./kubectl /usr/local/bin/kubectl && \
+        curl -L https://git.io/get_helm.sh | bash && \
+        echo ${{ secrets.DEPLOYER }} | base64 --decode > deployer.json && \
+        gcloud auth activate-service-account ${{ secrets.SERVICEACCOUNT }} --key-file=$(pwd)/deployer.json --project=${{ secrets.PROJECTNAME }} && \
+        gcloud container clusters get-credentials ${{ secrets.CLUSTERNAME }} --zone ${{ secrets.ZONE }} && \
+        helm init --client-only 
+        
+        
+      shell: bash
+    - name: Helm deploy
+      run: helm upgrade --install helloworld hello-world --namespace application --set image.tag="latest"
