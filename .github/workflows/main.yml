@@ -29,6 +29,6 @@ jobs:
           id
           pwd
           ls
-      - name: Jenkinsfile Runner Prepackaged
-        uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
+      #- name: Jenkinsfile Runner Prepackaged
+      #  uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
 
