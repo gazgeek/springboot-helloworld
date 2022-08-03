@@ -1,3 +1,9 @@
+def mvn(args) {
+    sh "mvn ${args} -Dmaven.repo.local=/github/workspace/.m2"
+}
+def mysh(cmd) {
+    sh('#!/bin/sh -e\n' + cmd)
+}
 pipeline {
     agent any
 
