@@ -34,7 +34,5 @@ jobs:
       #  uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
       - name: jenkinsfile-runner-prepackaged
         uses: jenkinsci/jenkinsfile-runner-github-actions/jenkinsfile-runner-prepackaged@master
-        with:
-          pluginstxt: "jenkinsfile-runner-prepackaged/test/plugins.txt"
 
 
