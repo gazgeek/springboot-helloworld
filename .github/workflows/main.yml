@@ -34,5 +34,5 @@ jobs:
         run: |
           ls
           pwd
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          mvn clean package
+          ls target
