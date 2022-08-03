@@ -34,5 +34,5 @@ jobs:
         run: |
           ls
           pwd
-          mvn clean package
+          mvn clean package -DskipTests
           ls target
