@@ -25,13 +25,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: run single command
-        run: | 
-          id
-          pwd
-          ls
-      - name: Jenkinsfile Runner Prepackaged
-        uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
-
+#       - name: run single command
+#         run: | 
+#           id
+#           pwd
+#           ls
+#       - name: Jenkinsfile Runner Prepackaged
+#         uses: jenkinsci/jenkinsfile-runner-github-actions@v0.2
+      - name: Trigger jenkins job
+        uses: joshlk/jenkins-githubaction@master
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          job_name: test-github-ci-job
+          username: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          timeout: "1000"
 
 
